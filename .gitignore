@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+data/rules/*.db
+data/samples/*.pdf
+data/samples/*.xlsx
+data/samples/*.docx
+data/output/
+*.log
+
+# API Keys
+.env
+*.env.local
+
+# ML models
+models/*.bin
+models/*.onnx
+
+# Notebook
+.ipynb_checkpoints/
+
+# Cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

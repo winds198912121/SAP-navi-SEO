@@ -1,0 +1,611 @@
+{
+  "rule_library_version": "1.0",
+  "created": "2026-06-28",
+  "rules": {
+    "period": [
+      {
+        "id": "period_001",
+        "description": "YYYY/MM/DD 〜 YYYY/MM/DD",
+        "pattern": "(\\d{4})[/\\-年](\\d{1,2})[/\\-月](\\d{1,2})?日?\\s*[〜~\\-\\–]\\s*(\\d{4})[/\\-年](\\d{1,2})[/\\-月](\\d{1,2})?日?"
+      },
+      {
+        "id": "period_002",
+        "description": "YYYY/MM/DD 〜 (long term implied)",
+        "pattern": "(\\d{4})[/\\-年](\\d{1,2})[/\\-月](\\d{1,2})?日?\\s*[〜~\\-]"
+      },
+      {
+        "id": "period_003",
+        "description": "YYYY年M月 〜 YYYY年M月",
+        "pattern": "(\\d{4})年(\\d{1,2})月\\s*[〜~\\-]\\s*(\\d{4})年(\\d{1,2})月"
+      },
+      {
+        "id": "period_004",
+        "description": "M月〜長期 (no year, e.g. 7月〜長期)",
+        "pattern": "(\\d{1,2})[月]\\s*[〜~\\-]\\s*(?:長期|末)"
+      },
+      {
+        "id": "period_005",
+        "description": "M月开始 (Chinese form, e.g. 8月开始)",
+        "pattern": "(\\d{1,2})月\\s*开[始]"
+      },
+      {
+        "id": "period_006",
+        "description": "即日 (immediate start)",
+        "pattern": "即日"
+      },
+      {
+        "id": "period_007",
+        "description": "随時 (anytime)",
+        "pattern": "随時"
+      },
+      {
+        "id": "period_008",
+        "description": "Immediate (English)",
+        "pattern": "[Ii]mmediate"
+      },
+      {
+        "id": "period_009",
+        "description": "M月〜M月 (month range)",
+        "pattern": "(\\d{1,2})[月]\\s*[〜~\\-]\\s*(\\d{1,2})[月]"
+      },
+      {
+        "id": "period_010",
+        "description": "即日 or M月",
+        "pattern": "即日(?:\\s*or\\s*|\\s*又は\\s*|\\s*or\\s*)?(\\d{1,2})[月～]"
+      },
+      {
+        "id": "period_011",
+        "description": "Section header with month (e.g. 7月案件)",
+        "pattern": "^(\\d{1,2})月(?:案件|求)"
+      },
+      {
+        "id": "period_012",
+        "description": "[時期] M月〜",
+        "pattern": "[時期時間][：:]\\s*(\\d{1,2})[🈷月]\\s*[〜~\\-]"
+      },
+      {
+        "id": "period_rowtext_001",
+        "description": "時期: prefix (from row_text)",
+        "pattern": "時期[：:]\\s*(\\d{1,2})[月]\\s*(?:〜|\\-|～|\\n)"
+      },
+      {
+        "id": "period_rowtext_002",
+        "description": "時期: prefix with month only",
+        "pattern": "時期[：:]\\s*(\\d{1,2})[月]"
+      }
+    ],
+    "rate": [
+      {
+        "id": "rate_001",
+        "description": "月額70-80万円",
+        "pattern": "月額[：:]\\s*(\\d+(?:\\.\\d+)?)\\s*[〜~\\-\\–]\\s*(\\d+(?:\\.\\d+)?)\\s*万?(?:円)?"
+      },
+      {
+        "id": "rate_002",
+        "description": "月額70万〜80万円",
+        "pattern": "月額[：:].*?(\\d+(?:\\.\\d+)?)\\s*万?\\s*[〜~\\-]\\s*(\\d+(?:\\.\\d+)?)\\s*万?(?:円)?"
+      },
+      {
+        "id": "rate_003",
+        "description": "70-80万円/月額",
+        "pattern": "(\\d+(?:\\.\\d+)?)\\s*[〜~\\-\\–]\\s*(\\d+(?:\\.\\d+)?)\\s*万?(?:円)?(?:\\s*\\/\\s*月額)?"
+      },
+      {
+        "id": "rate_004",
+        "description": "Cost range: 130 K JPY/month",
+        "pattern": "Cost\\s*range\\s*[：:\\s]*(\\d+(?:[\\d,.]*))\\s*K\\s*JPY\\s*\\/\\s*month"
+      },
+      {
+        "id": "rate_005",
+        "description": "月額固定価格 e.g. 月額70万円",
+        "pattern": "月額[：:]\\s*(\\d+(?:\\.\\d+)?)\\s*万(?:円)?"
+      },
+      {
+        "id": "rate_006",
+        "description": "スキル見合い（60-90万円/月額）",
+        "pattern": "(\\d+(?:\\.\\d+)?)\\s*[〜~\\-]\\s*(\\d+(?:\\.\\d+)?)\\s*万(?:円)?\\s*\\/\\s*(?:月額|月)"
+      },
+      {
+        "id": "rate_007",
+        "description": "単価：範囲 in parens",
+        "pattern": "単価[：:]\\s*スキル見合い[（(]?(\\d+(?:\\.\\d+)?)\\s*[〜~\\-]\\s*(\\d+(?:\\.\\d+)?)\\s*万(?:円)?"
+      }
+    ],
+    "project_name": [
+      {
+        "id": "pname_001",
+        "description": "案件名：xxxx",
+        "pattern": "(?:案件名|件名)\\s*[：:]\\s*(.+?)(?=\\n|$)"
+      },
+      {
+        "id": "pname_002",
+        "description": "■案件名：xxxx",
+        "pattern": "■\\s*案件名[：:]\\s*(.+?)(?=\\n|$)"
+      },
+      {
+        "id": "pname_003",
+        "description": "案件名　：xxxx",
+        "pattern": "案件名[\\s　]*[：:]\\s*(.+?)(?=\\n(?:案件概要|作業内容|要求技術|作業場所|■|$))"
+      },
+      {
+        "id": "pname_004",
+        "description": "🔥案件N️⃣ form",
+        "pattern": "🔥*(案件\\d?[️⃣]?)(.*?)(?=\\n(?:⭕️|■|$))"
+      }
+    ],
+    "skill_must": [
+      {
+        "id": "skill_must_001",
+        "description": "【必須】section with bullet points",
+        "pattern": "【必須】[：」]*\\s*([\\s\\S]*?)(?=\\n(?:【尚可】|■|案件名|作業場所|場所|作業期間|募集人数|外国籍|面談|備考|⭕️|$))"
+      },
+      {
+        "id": "skill_must_002",
+        "description": "⭕️必须スキル/⭕️必須スキル section",
+        "pattern": "⭕️(?:必须|必須)スキル[：:」]*\\s*([\\s\\S]*?)(?=\\n(?:⭕️|■|案件名|$))"
+      },
+      {
+        "id": "skill_must_003",
+        "description": "【必須】inline skills",
+        "pattern": "【必須】[：」]*\\s*([^\\n]*)"
+      },
+      {
+        "id": "skill_must_004",
+        "description": "必須スキル section",
+        "pattern": "必須スキル[：:」]*\\s*([\\s\\S]*?)(?=\\n(?:■|案件名|作業場所|作業期間|【|$))"
+      },
+      {
+        "id": "skill_must_005",
+        "description": "要求技術 section",
+        "pattern": "要求技術[：:」]*\\s*([\\s\\S]*?)(?=\\n(?:作業場所|作業期間|募集人数|外国籍|面談|$))"
+      },
+      {
+        "id": "skill_must_006",
+        "description": "スキル要件 section",
+        "pattern": "■\\s*スキル要件[：:」]*\\s*([\\s\\S]*?)(?=\\n(?:■|$))"
+      },
+      {
+        "id": "skill_must_007",
+        "description": "要望スキル section",
+        "pattern": "要望スキル[：:」]*\\s*([\\s\\S]*?)(?=\\n(?:$))"
+      },
+      {
+        "id": "skill_must_008",
+        "description": "【必須】 inside text (Azure pattern)",
+        "pattern": "【必須】[」]*([^\\n]+)"
+      },
+      {
+        "id": "skill_must_009",
+        "description": "応募資格 section",
+        "pattern": "応募資格[：:」]*\\s*([\\s\\S]*?)(?=\\n(?:単価|場所|期間|$))"
+      },
+      {
+        "id": "skill_must_excel_001",
+        "description": "スキル: prefix (from row_text)",
+        "pattern": "スキル[：:]\\s*([\\s\\S]*?)(?=\\n(?:場所|$))"
+      },
+      {
+        "id": "skill_must_excel_002",
+        "description": "【必須】in skill column text",
+        "pattern": "【必須】[」]*\\s*([^※]+)"
+      },
+      {
+        "id": "skill_must_excel_003",
+        "description": "【必須】then newline then bullets in row_text",
+        "pattern": "【必須】\\n\\s*([\\s\\S]*?)(?=\\n場所)"
+      },
+      {
+        "id": "skill_must_013",
+        "description": "要望スキルセクションから必須スキルを抽出",
+        "pattern": "要望スキル[：:]*\\s*([^\\n]+)",
+        "priority": 50,
+        "field": "skill_must"
+      }
+    ],
+    "skill_preferred": [
+      {
+        "id": "skill_pref_001",
+        "description": "【尚可】section",
+        "pattern": "【尚可】[：」]*\\s*([\\s\\S]*?)(?=\\n(?:作業場所|作業期間|募集人数|外国籍|面談|備考|■|$))"
+      },
+      {
+        "id": "skill_pref_002",
+        "description": "【尚可】inline",
+        "pattern": "【尚可】[：」]*\\s*([^\\n]*)"
+      }
+    ],
+    "location": [
+      {
+        "id": "loc_001",
+        "description": "作業場所：xxxx",
+        "pattern": "作業場所[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "loc_002",
+        "description": "勤務地：xxxx",
+        "pattern": "勤務地[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "loc_003",
+        "description": "■出社（勤務地）・リモート有無",
+        "pattern": "■?出社（勤務地）・リモート有無[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "loc_004",
+        "description": "場所：xxxx (⭕️ form)",
+        "pattern": "⭕️場所[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "loc_005",
+        "description": "勤務先：xxxx",
+        "pattern": "勤務先[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "loc_006",
+        "description": "場所 key in Chinese context",
+        "pattern": "[场所]所[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "loc_rowtext_001",
+        "description": "場所: prefix (from row_text)",
+        "pattern": "場所[：:]\\s*([^\\n]+)"
+      }
+    ],
+    "headcount": [
+      {
+        "id": "head_001",
+        "description": "募集人数：N名",
+        "pattern": "募集人数[：:]\\s*(\\d+)\\s*名"
+      },
+      {
+        "id": "head_002",
+        "description": "⭕️人数：N名",
+        "pattern": "⭕️人数[：:]\\s*(\\d+)\\s*名"
+      },
+      {
+        "id": "head_003",
+        "description": "募集役職・人数：title N名",
+        "pattern": "募集役職・人数[：:][^\\d]*(\\d+)\\s*名"
+      },
+      {
+        "id": "head_004",
+        "description": "人数：N〜N名 (range, use max)",
+        "pattern": "⭕️人数[：:]\\s*[３-９3-9]\\s*[〜~]\\s*(\\d+)\\s*名"
+      },
+      {
+        "id": "head_005",
+        "description": "人数：N名 (with full-width)",
+        "pattern": "人数[：:]\\s*(\\d+)\\s*名"
+      },
+      {
+        "id": "head_006",
+        "description": "複数名 (multiple, return null)",
+        "pattern": "複数名"
+      },
+      {
+        "id": "head_007",
+        "description": "N名 pattern in sentences",
+        "pattern": "[^の](\\d+)\\s*名(?:、|\\s|$|,)"
+      },
+      {
+        "id": "head_008",
+        "description": "SE N名 pattern",
+        "pattern": "SE\\s*(\\d+)\\s*名"
+      },
+      {
+        "id": "head_rowtext_001",
+        "description": "人数: prefix (from row_text)",
+        "pattern": "人数[：:]\\s*([^\\n]+)"
+      }
+    ],
+    "interviews": [
+      {
+        "id": "int_001",
+        "description": "面談回数：N回",
+        "pattern": "面談回数[：:]\\s*(\\d+)\\s*回"
+      },
+      {
+        "id": "int_002",
+        "description": "■面談回数：N回",
+        "pattern": "■\\s*面談回数[：:]\\s*(\\d+)\\s*回"
+      },
+      {
+        "id": "int_003",
+        "description": "面談N回 in text",
+        "pattern": "面談(\\d+)回"
+      },
+      {
+        "id": "int_004",
+        "description": "面接N回",
+        "pattern": "面接(\\d+)回"
+      }
+    ],
+    "japanese_level": [
+      {
+        "id": "jp_001",
+        "description": "日本語N1流暢",
+        "pattern": "日本語\\s*(N[1-4])\\s*流暢"
+      },
+      {
+        "id": "jp_002",
+        "description": "日本語N1 (bare)",
+        "pattern": "日本語\\s*(N[1-4])"
+      },
+      {
+        "id": "jp_003",
+        "description": "日本語でのコミュニケーション必須",
+        "pattern": "日本語での"
+      },
+      {
+        "id": "jp_004",
+        "description": "日本語ネイティブ/母国語",
+        "pattern": "日本語(?:ネイティブ|母国語)"
+      },
+      {
+        "id": "jp_005",
+        "description": "日本語ビジネスレベル",
+        "pattern": "日本語(?:ビジネスレベル|ビジネス|business\\s*level)"
+      },
+      {
+        "id": "jp_006",
+        "description": "日本語流暢",
+        "pattern": "日本語\\s*流暢"
+      },
+      {
+        "id": "jp_007",
+        "description": "Japanese only OK",
+        "pattern": "JAPANESE\\s*ONLY\\s*OK"
+      },
+      {
+        "id": "jp_008",
+        "description": "外国籍可 (implies business Japanese needed)",
+        "pattern": "外国籍[\\s　]*[：:]\\s*可"
+      },
+      {
+        "id": "jp_009",
+        "description": "日語业务水平",
+        "pattern": "日语\\s*业务水平"
+      }
+    ],
+    "industry": [
+      {
+        "id": "ind_001",
+        "description": "金融",
+        "pattern": "金融"
+      },
+      {
+        "id": "ind_002",
+        "description": "製造業/製造",
+        "pattern": "製造(?:業|)"
+      },
+      {
+        "id": "ind_003",
+        "description": "小売/小売業",
+        "pattern": "小売(?:業|)"
+      },
+      {
+        "id": "ind_004",
+        "description": "製薬/製薬業界",
+        "pattern": "製薬"
+      },
+      {
+        "id": "ind_005",
+        "description": "電気機器",
+        "pattern": "電気機器"
+      },
+      {
+        "id": "ind_006",
+        "description": "エネルギー",
+        "pattern": "エネルギー"
+      },
+      {
+        "id": "ind_007",
+        "description": "通信",
+        "pattern": "通信"
+      },
+      {
+        "id": "ind_008",
+        "description": "証券",
+        "pattern": "証券"
+      },
+      {
+        "id": "ind_009",
+        "description": "保険",
+        "pattern": "保険"
+      }
+    ],
+    "trade_flow": [
+      {
+        "id": "trade_001",
+        "description": "準委任",
+        "pattern": "準委任"
+      },
+      {
+        "id": "trade_002",
+        "description": "派遣または準委任",
+        "pattern": "派遣または準委任"
+      },
+      {
+        "id": "trade_003",
+        "description": "派遣",
+        "pattern": "派遣"
+      },
+      {
+        "id": "trade_004",
+        "description": "請負",
+        "pattern": "請負"
+      },
+      {
+        "id": "trade_005",
+        "description": "SES",
+        "pattern": "SES"
+      },
+      {
+        "id": "trade_006",
+        "description": "契約形態",
+        "pattern": "契約形態[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "trade_007",
+        "description": "商流制限",
+        "pattern": "商流制限[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "trade_008",
+        "description": "直接客户",
+        "pattern": "直接客户"
+      }
+    ],
+    "english_level": [
+      {
+        "id": "eng_001",
+        "description": "英語での読み書き",
+        "pattern": "英語での読み書き"
+      },
+      {
+        "id": "eng_002",
+        "description": "英語での日常会話",
+        "pattern": "英語での日常会話"
+      },
+      {
+        "id": "eng_003",
+        "description": "TOEIC",
+        "pattern": "TOEIC"
+      }
+    ],
+    "immediate_start": [
+      {
+        "id": "imm_001",
+        "description": "即日",
+        "pattern": "即日"
+      },
+      {
+        "id": "imm_002",
+        "description": "Immediate",
+        "pattern": "[Ii]mmediate"
+      },
+      {
+        "id": "imm_003",
+        "description": "随時",
+        "pattern": "随時"
+      }
+    ],
+    "experience_years": [
+      {
+        "id": "exp_001",
+        "description": "N年以上",
+        "pattern": "(\\d+)\\s*年[以上]"
+      },
+      {
+        "id": "exp_002",
+        "description": "実務経験N年以上",
+        "pattern": "実務経験(\\d+)\\s*年以上"
+      },
+      {
+        "id": "exp_003",
+        "description": "経験N年 (in parens)",
+        "pattern": "経験(\\d+)年"
+      }
+    ],
+    "remarks": [
+      {
+        "id": "rmk_001",
+        "description": "備考 section",
+        "pattern": "(?:備考|その他・備考|特記事項)[：:]\\s*([\\s\\S]*?)(?=\\n(?:案件名|■|$|----))"
+      },
+      {
+        "id": "rmk_002",
+        "description": "その他 line",
+        "pattern": "■その他[：:]\\s*([^\\n]+)"
+      },
+      {
+        "id": "rmk_003",
+        "description": "備考 lines starting with ・",
+        "pattern": "その他・備考[：:][\\s\\S]*?(・[^\\n]+)"
+      }
+    ],
+    "remote_policy": [
+      {
+        "id": "remote_001",
+        "description": "フルリモート",
+        "pattern": "フルリモート"
+      },
+      {
+        "id": "remote_002",
+        "description": "基本リモート",
+        "pattern": "基本リモート"
+      },
+      {
+        "id": "remote_003",
+        "description": "在宅勤務割合：N%",
+        "pattern": "在宅勤務割合[：:]\\s*(\\d+%)"
+      },
+      {
+        "id": "remote_004",
+        "description": "週N在宅",
+        "pattern": "週(\\d+)在宅"
+      },
+      {
+        "id": "remote_005",
+        "description": "週N出社 (hybrid)",
+        "pattern": "週(\\d+)出社"
+      },
+      {
+        "id": "remote_006",
+        "description": "在宅併用",
+        "pattern": "在宅併用"
+      },
+      {
+        "id": "remote_007",
+        "description": "基本フル出勤",
+        "pattern": "基本フル出勤"
+      }
+    ],
+    "station": [
+      {
+        "id": "sta_001",
+        "description": "駅名 pattern",
+        "pattern": "([一-鿿]{1,4}駅)"
+      },
+      {
+        "id": "sta_002",
+        "description": "駅名 in parens",
+        "pattern": "[（(]([一-鿿]{1,4}駅)[）)]"
+      }
+    ]
+  },
+  "post_process": {
+    "skill_requirement": {
+      "split_delimiters": [
+        "、",
+        "・",
+        "/",
+        "\\s+",
+        "，"
+      ],
+      "trim": true,
+      "filter_empty": true,
+      "deduplicate": true,
+      "min_length": 2,
+      "filter_headers": [
+        "【必須】",
+        "【尚可】",
+        "■ 必須",
+        "■ 尚可",
+        "※"
+      ]
+    },
+    "preferred_skills": {
+      "split_delimiters": [
+        "、",
+        "・",
+        "/"
+      ],
+      "trim": true,
+      "filter_empty": true,
+      "deduplicate": true,
+      "min_length": 2
+    }
+  },
+  "updated": "2026-07-04 (fix duplicates)"
+}
