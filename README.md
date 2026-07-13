@@ -13,7 +13,7 @@
 任何人都可以通过以下命令将此项目安装为全局 Skill，在任何 Claude Code 会话中调用：
 
 ```bash
-curl -fsSL https://github.com/winds198912121/SAP-navi-SEO/jp-recruit-extractor/main/scripts/install-skill.sh | bash
+curl -fsSL https://raw.githubusercontent.com/winds198912121/SAP-navi-SEO/main/scripts/install-skill.sh | bash
 ```
 
 安装后，在 Claude Code 中直接说：
@@ -44,8 +44,8 @@ curl -fsSL https://github.com/winds198912121/SAP-navi-SEO/jp-recruit-extractor/m
 
 ```bash
 # 1. 安装
-git clone https://github.com/winds198912121/SAP-navi-SEO//jp-recruit-extractor.git
-cd jp-recruit-extractor
+git clone https://github.com/winds198912121/SAP-navi-SEO.git
+cd SAP-navi-SEO
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 

@@ -3,7 +3,7 @@
 # JP Recruit Extractor — Skill 全局安裝脚本
 # ──────────────────────────────────────────
 # 用法:
-#   curl -fsSL https://raw.githubusercontent.com/raysource/jp-recruit-extractor/main/scripts/install-skill.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/winds198912121/SAP-navi-SEO/main/scripts/install-skill.sh | bash
 # 或:
 #   bash scripts/install-skill.sh
 #
@@ -16,7 +16,7 @@
 
 set -euo pipefail
 
-REPO_URL="https://github.com/raysource/jp-recruit-extractor.git"
+REPO_URL="https://github.com/winds198912121/SAP-navi-SEO.git"
 TARGET_DIR="${HOME}/jp-recruit-extractor"
 SKILL_NAME="run-jp-recruit-extractor"
 CLAUDE_SKILLS_DIR="${HOME}/.claude/skills"
