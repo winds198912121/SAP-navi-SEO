@@ -102,7 +102,7 @@ Phase 4: 持续进化（用户反馈闭环 → 自动生成新规则）
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/winds198912121/SAP-navi-SEO//jp-recruit-extractor.git
+git clone https://github.com/winds198912121/SAP-navi-SEO.git
 cd jp-recruit-extractor
 
 # 2. 创建虚拟环境
@@ -954,4 +954,4 @@ open http://localhost:8000/redoc   # ReDoc
 ---
 
 *文档版本: v1.0 | 最后更新: 2026-07-06*
-*项目仓库: https://github.com/winds198912121/SAP-navi-SEO//jp-recruit-extractor*
+*项目仓库: https://github.com/winds198912121/SAP-navi-SEO*
