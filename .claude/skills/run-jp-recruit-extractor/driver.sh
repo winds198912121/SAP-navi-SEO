@@ -2,7 +2,7 @@
 # jp-recruit-extractor driver — smoke-test the full pipeline
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+ROOT="$(cd "$(dirname "$(readlink -f "$0")")/../../.." && pwd)"
 PYTHON="python3"
 
 cd "$ROOT"
